@@ -1,0 +1,110 @@
+<!-- https://github.com/cpe-lyon/groupe-c-gibou-picard-->
+<!--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-->
+
+<!-- 
+"""
+Site Web de Voyage
+Par : Picard Raphaël et Gibou Adélie 3ETI
+Lieu : CPE LYON
+Date de rendu : 20/12/2024
+Codé en : HTML, CSS, JS, JSON sur VSCode
+
+Ce document contenant la page principale. A lancer pour lancer le site.
+L'objectif de ce site web est de créer un site de voyage fictif en utilisant les langages mentionnés au dessus.
+Il respectera un cahier des charges précis et sera codé en binôme.
+
+Todo : - Rendre le site responsive (consultable sur tel)
+       - Mettre une photo dans "a propos & contacts" de la devanture de notre boutique
+       - Faire une gestion du panier, pouvoi renlever ou ajouter plusieurs voyages dans le panier
+       - Modifier le prix en fonction du voyage choisi
+     
+-->
+
+
+
+ <!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blue Escape</title>
+    <link rel="icon" type="image/png" href="../image/logo_carre.png">
+    <link rel="stylesheet" href="../css/siteweb.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="../js/header.js" defer></script>
+    <script src="../js/recherch1.js" defer></script>
+    <script src="../js/footer.js" defer></script>
+</head>
+<body>
+    <!-- Section pour le haut de page avec le logo à gauche et fond bleu -->
+    <div id="header-container"></div> <!-- Conteneur pour le header -->
+    <main>
+        <section class="filtre">
+            <div class="image-container">
+                <img src="../image/airplane.jpg" alt="Avion" class="background-image"> <!-- Image d'avion -->
+                <!-- Conteneur principal de la barre de recherche -->
+                <div class="search-bar-container">
+                    <form class="search-form">
+                        <!-- Champ de recherche de destination avec auto-suggestion -->
+                        <input type="text" class="search-input" id="destination" placeholder="Recherchez votre destination" list="destination-list">
+                        <datalist id="destination-list">
+                            <option value="Nairobi">
+                            <option value="New York">
+                            <option value="Paris">
+                            <option value="Rio">
+                            <option value="Sydney">
+                            <option value="Tokyo">
+                        </datalist>
+                
+                        <!-- Sélecteur pour le type de voyage -->
+                        <select class="search-select" id="travel-type">
+                            <option value="">Type de voyage</option>
+                            <option value="aventure">Aventure</option>
+                            <option value="famille">Famille</option>
+                            <option value="romantique">Romantique</option>
+                        </select>
+                        
+                        <!-- Case à cocher pour les animaux -->
+                        <div class="search-select">
+                            <input type="checkbox" id="pets-allowed">
+                            <label for="pets-allowed">Animaux acceptés</label>
+                        </div>
+                        <!-- Sélecteur pour le budget -->
+                        <select class="search-select" id="budget">
+                            <option value="">Budget</option>
+                            <option value="low">Moins de 1000€</option>
+                            <option value="mid">1000€ - 3000€</option>
+                            <option value="high">Plus de 3000€</option>
+                        </select>
+                
+                        <!-- Bouton de recherche -->
+                        <button type="submit" class="search-button">Rechercher</button>
+                    </form>
+                    <div id="search-results"></div>
+
+                </div>
+                
+            </div>
+        </section>
+
+        <section>
+            <h2 id="NosVoyages">Nos voyages</h2>
+
+            <nav>
+                <h2></h2>
+                <div class="voyage-items"> <!-- nav pour la section des voyages -->
+
+                    <!-- On enleve tout le html des voyages parce que tout est stocké avec des templates, json... -->
+                    
+
+                </div>
+            </nav>
+        </section>
+    </main>
+
+
+    <!-- Footer -->
+    <div id="footer"></div>
+    
+</body>
+</html>

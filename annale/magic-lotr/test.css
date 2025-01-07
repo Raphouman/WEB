@@ -1,0 +1,22 @@
+
+#pond {
+    display: flex; 
+    justify-content: flex-end;         /* met la grenouille à droite sur l'axe des abscisses (horizontalement), ya center, flex-start, space-between (espace entre eux equivalent), space-around (bcp d'espace tt autour d'eux) */
+    align-items: flex-start;            /* met la grenouille en haut sur l'axe des ordonnées (verticalement), ya center, flex-end, baseline et stretch*/
+    flex-direction: row;                /* met les éléments les uns à côté des autres , row-reverse, column, column-reverse*/
+
+    flex-wrap: wrap;                    /* si les éléments ne tiennent pas sur une ligne, ils passent à la ligne d'en dessous, ya nowrap (1 seule ligne donc écrasés), et wrap-reverse */
+   
+    /* ATTENTION SI FLEX-DIRECTION : COLUMN, alors justify-content devient pour la verticale et align-items pour l'horizontale*/
+  }
+
+.yellow {
+    order: 1;                          /* ordre d'affichage des éléments, 1 est le premier à s'afficher, 2 le deuxième etc... */
+    align-self: flex-end;               /* aligne l'élément par rapport à lui-même, ya flex-start, flex-end, center, baseline et stretch */
+}
+
+
+#pond {
+    flex-flow: column wrap;                /* flex-direction et flex-wrap en une seule ligne */
+    align-content: flex-start;            /* Ceci peut être déroutant, mais align-content détermine l'espace entre les lignes, alors que align-items détermine comment les éléments dans leur ensemble sont alignées à l'intérieur du conteneur. Quand il n'y a qu'une seule ligne, align-content n'a aucun effet*/
+}

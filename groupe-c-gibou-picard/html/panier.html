@@ -1,0 +1,76 @@
+<!-- rajouter la destionation dans le panier
+ faire bien le css
+ pouvoir ajouter plusieurs voyages dans le panier(boutton soumettre?)
+ afficher que le panier est vide si on n'a rien soumis
+ faire afficher le formulaire plur payer seulement une fois qu'on a validé le panier
+  -->
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panier</title>
+    <link rel="icon" type="image/png" href="../image/logo_carre.png">
+    <link rel="stylesheet" href="../css/siteweb.css"> 
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="../js/panier.js" defer></script>
+    <script src="../js/header.js" defer></script>
+    <script src="../js/footer.js" defer></script>
+</head>
+<body> 
+    <div id="header-container"></div> <!-- Conteneur pour le header -->
+
+    <main>
+        <div class="progress-bar">
+            <div class="step">
+                <span class="circle completed">1</span>
+                <p>Panier</p>
+            </div>
+            <div class="line completed"></div>
+            <div class="step">
+                <span class="circle">2</span>
+                <p>Payement</p>
+            </div>
+            <div class="line"></div>
+            <div class="step">
+                <span class="circle">3</span>
+                <p>Confirmation</p>
+            </div>
+        </div>
+
+        <div class="form-and-video-container"> <!-- gerer la place des infos panier et des videos -->
+
+            <div class="panier-details">
+                <p id="adults"> </p>
+                <p id="children"> </p>
+                <p id="breakfast"></p>
+                <p id="departure-date"></p>               <!--ce sont les endroits ou seront écrit les données de reservation (voir panier.js)-->
+                <p id="return-date"></p>
+                <p id="days"></p>
+                <p id="price"></p>
+
+                <a href="payement.html">
+                    <button class="validate-button">Valider le panier</button>
+                </a>
+            </div>
+
+
+            <div class="video-container">
+                <video id="video-carousel" class="video-player" autoplay muted loop>
+                    <source src="../video/video1.mp4" type="video/mp4">
+                    <!-- Ajoutez d'autres formats si nécessaire -->
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+        
+    </main>
+    <div id="footer"></div>
+
+</body>
+</html>

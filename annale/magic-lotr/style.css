@@ -1,0 +1,85 @@
+body {
+    background-image: linear-gradient(rgba(57, 13, 10, 0.6), rgba(57, 13, 10, 0.6)), url(https://images.ctfassets.net/s5n2t79q9icq/1RJfBURhOuSJba5feByRzk/f8352755ec2b3a015dd82568d74dba4c/Hsnfvfty23lnf0-1920x1040.jpg);
+    background-attachment: fixed;
+    
+} 
+
+body {
+    margin: 0;  /*centrer (auto) horizontalement */
+    padding: 0 ;
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+}
+
+header {
+    background-color: black;
+    height: 55px;
+    display: flex;
+    padding-left: 5%;
+    width: 100%; 
+    position: sticky; /*pour que le header reste en haut de la page */
+    top : 0; /*pour que le header reste en haut de la page */
+}
+
+header a {
+    color: white;
+    font-weight: bold; /*gras */
+    text-transform: uppercase; /*majuscule */
+    text-decoration: none;  /*pas de soulignement */
+    padding: 0 1em; /*padding de 0 en haut et en bas et 1em à gauche et à droite , le padding  */ 
+}
+
+header a:hover {   /*quand on passe la souris sur le lien */
+    color: #ea3601; /*couleur rouge et attention pas background-color */
+}
+
+header nav {
+    display: flex;
+    /*on utilise que justify-content et align-items*/
+    justify-content: center; /*centrer verticalement */
+    align-items: center; /*centrer horizontalement */
+    list-style-type: None; /*pas de rond */
+    padding-left: 1 em;  /*padding à gauche */
+    padding-right: 1 em; /*padding à droite , em est une unité relative à la taille de la police de caractère */
+}
+
+#logo {
+    width: 130px;
+
+}
+
+main {
+    width: 75%;
+    margin: 0 auto; /*centrer horizontalement , attention bien le mettre avant le margin-top sinon ca l'annule et le auto est pour centrer */
+    display: flex; /*flexbox pour aligner les trucs*/
+    justify-content: center; /*centrer horizontalement */
+    margin-top: 15px;
+    flex-direction: column; /*pour que les éléments soient les uns en dessous des autres , les cartes...*/
+    align-items: center; /*centrer verticalement et ca dézoom */
+}
+
+#grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto auto; /*4 colonnes , equilibre la grille et espace les colonnes du meme ecart*/
+    grid-gap: 15px; /*espace entre les éléments */
+}
+
+.card-img {
+    height: 320px;
+    border-radius: 10px;
+}
+
+.card p {
+    color: antiquewhite;
+    font-weight: 500; /*graisse */
+}
+
+.mana {
+    width: 15px;
+}
+
+.card { /* on veut enlever l'espace du milieu des cartes*/
+    display :flex;
+    flex-direction: column;
+    align-items: center;
+}

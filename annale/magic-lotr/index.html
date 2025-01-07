@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Annale_Raphou</title>
+    <script src="script.js" defer>
+        
+    </script>
+    
+</head>
+<body onload="afficherCartes()">
+    <header>
+        <img id="logo" src="images/logo.png" alt="logo">
+        <nav>   <!--nav existe mais pas navbar attention-->
+            <!-- <li><a href="test.html">PRODUITS</a></li> et attention li c'est liste et a c'est des liens hypertexte-->
+            <a href="">PRODUITS</a>
+            <a href="">REGARDER</a>
+            <a href="">JOUER</a>
+            <a href="">HISTOIRE</a>
+            <a href="">ARTICLES</a>
+            
+        </nav>
+    </header>
+    <main>
+        <img src="images/LTR.webp" alt="image de fond">
+        <div id = "grid-container">
+            <template id="card-template">
+                <div class="card">
+                    <img class="card-img">
+                    <p>{{texte}}</p>
+                    <div class=" mana-img">  <!--on raj une classe (pas un id car on est dans une template qui va etre appelé plein de fois) ici pour que toutes les images de symboles de mana soit à coté-->
+                    </div>
+                </div>
+            </template>
+
+        </div>
+
+    </main>
+
+</body>
+</html>

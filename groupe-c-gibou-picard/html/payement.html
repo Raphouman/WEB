@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payement</title>
+    <link rel="icon" type="image/png" href="../image/logo_carre.png">
+    <link rel="stylesheet" href="../css/siteweb.css"> 
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="../js/header.js" defer></script>
+    <script src="../js/panier.js" defer></script>   <!-- c'est pour la barre de progression-->
+    <script src="../js/footer.js" defer></script>
+</head>
+<body>
+    <div id="header-container"></div> <!-- Conteneur pour le header -->
+
+
+    <div class="progress-bar">
+        <div class="step">
+            <span class="circle completed">1</span>
+            <p>Panier</p>
+        </div>
+        <div class="line completed"></div>
+        <div class="step">
+            <span class="circle">2</span>
+            <p>Payement</p>
+        </div>
+        <div class="line"></div>
+        <div class="step">
+            <span class="circle">3</span>
+            <p>Confirmation</p>
+        </div>
+    </div>
+
+    <div class="form-and-video-container"> <!-- gerer la place des infos panier et des videos -->
+
+        <form id="payment-form" class="payment-form">
+            <div class="form-group">
+                <label for="first-name">Prénom *</label>
+                <input type="text" id="first-name" name="first-name" required>
+            </div>
+        
+            <div class="form-group">
+                <label for="last-name">Nom *</label>
+                <input type="text" id="last-name" name="last-name" required>
+            </div>
+        
+            <div class="form-group">
+                <label for="birth-date">Date de naissance:</label>
+                <input type="date" id="birth-date" name="birth-date" required>
+            </div>
+        
+            <div class="form-group">
+                <label for="credit-card">Numéro de carte bancaire *</label>
+                <input type="text" id="credit-card" name="credit-card" pattern="(\d{16}|(\s?\d{4}){4})" required placeholder="1234 5678 9012 3456">
+            </div>
+        
+            <div class="form-group">
+                <label for="expiration-date">Date d'expiration *</label>
+                <input type="text" id="expiration-date" name="expiration-date" pattern="^(0[1-9]|1[0-2])/([0-9]{4})$" required placeholder="MM/AAAA"> <!-- le pattern assure que le mois soit entre 1 et 12 --> <!-- aide l'utilisateur a comprendre le format attendu-->
+            </div>
+
+            <div class="form-group">
+                <label for="cvv">CVV *</label>
+                <input type="text" id="cvv" name="cvv" placeholder="123" pattern="^\d{3}$" inputmode="numeric"  required >
+            <div class="form-group">
+                <label for="address">Adresse de facturation *</label>
+                <input type="text" id="address" name="address" required>
+            </div>
+
+            <button id="reset-button-form" type="button">Remettre à 0</button>
+            <button type="submit" class="submit-button">Soumettre</button>
+        </form>
+
+
+
+        <div id="footer"></div>
+
+
+        
+
+        <div class="video-container">
+            <video id="video-carousel" class="video-player" autoplay muted loop>
+                <source src="../video/video2.mp4" type="video/mp4">
+                <!-- Ajoutez d'autres formats si nécessaire -->
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+
+    
+
+
+    <div id="loading-overlay" style="display: none;">
+        <div class="loading-bar"></div>
+        <p>Confirmation de votre voyage...</p>
+        <p>Veuillez ne pas quitter cette page</p>
+    </div>
+
+
+
+    
+
+</body>
+</html>

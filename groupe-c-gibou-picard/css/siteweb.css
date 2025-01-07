@@ -1,0 +1,696 @@
+main {
+margin-top: 100px !important ;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+
+/* Style pour la section du haut de page */
+.top-page {
+    display: flex; /* Utilise flexbox pour disposer les éléments */
+    background: linear-gradient(to right, #092066, #0a2260, #102b7a); /* Fond bleu */
+    align-items: center; /* Centre verticalement les éléments */
+    padding: 10px; /* Ajoute un espacement autour du contenu */
+    position: fixed; /* Rend l'en-tête fixe */
+    top: 0; /* Positionne en haut */
+    width: 100%; /* Prend toute la largeur */
+    z-index: 1000; /* S'assure que c'est au-dessus des autres éléments sur l'axe z qui pointe vers nous */
+    height: 100px; /* Ajustez la hauteur réelle du header */
+    box-sizing: border-box; /* Inclut padding dans la hauteur */
+}
+
+/* Conteneur pour le logo */
+.logo-container {
+    margin-right: 10px;           /* Espace à droite du logo */
+    margin-left: 5px;
+}
+
+/* Titre de la page */
+.page-title {
+    flex-grow: 1;                 /* Permet au titre de prendre l'espace disponible */
+    color: white;                 /* Couleur du texte en blanc */
+}
+
+/* Style de la navigation */
+.nav-menu {
+    display: flex;                /* Utilise flexbox pour la navigation */
+}
+
+/* Liens de navigation */
+.nav-link {
+    color: white;                      /* Couleur des liens en blanc */
+    text-decoration: none;             /* Enlève le soulignement des liens */
+    margin:  15px;                   /* Espace entre les liens */
+    font-size: 20px;                  /* Taille de police des liens */
+    padding:10px;                       /* distance à laquelle le lien est selectionné donc espace des autres aussi */
+    transition: transform 0.3s ease, filter 0.3s ease, text-decoration 0.3s ease, color 0.3s ease; /* Transition fluide */
+    font-weight: bold;                  /*police*/
+}
+
+/* Effet au survol */
+.nav-link:hover {
+    text-decoration: underline;        /* Souligne le lien au survol */
+    transform: scale(1.1);            /* Agrandit le lien à 110% lors du survol */
+    filter: brightness(1.2);           /* Éclaircit le lien au survol */
+    color: #006fbf; 
+}
+
+.image-container {
+    width: 100%; /* Largeur désirée */
+    height: calc(100vh - 100px); /* Hauteur désirée */
+    overflow: hidden; /* Masque le débordement */
+    position: relative;
+}
+
+.image-container img {
+    width: 100%; /* L'image s'ajuste à la largeur du conteneur */
+    height: auto; /* Maintient les proportions de l'image */
+    position: relative;
+    top: -200px; /* Déplace l'image vers le haut de 200 pixels */
+}
+.voyage-item { /* Style pour chaque élément de la grille */     /* class appelée dans le js des voyages filtrés ou pas encore*/
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transform-origin: center center;
+}
+
+.voyage-item:hover .temperature {
+    display: block;
+}
+
+.voyage-items {
+    display: grid;
+    grid-template-columns: repeat(3, 2fr); /* 3 colonnes de même taille */ 
+    gap: 20px; /* Espace entre les éléments */
+    padding:20px;
+}
+
+/* Pour les écrans plus petits, on passe à 1 ou 2 colonnes */
+@media (max-width: 768px) {
+    .voyage-items {
+        grid-template-columns: repeat(2, 1fr); /* 2 colonnes sur les écrans de taille moyenne */
+    }
+}
+
+@media (max-width: 480px) {
+    .voyage-items {
+        grid-template-columns: 1fr; /* 1 colonne sur les écrans très petits (smartphones) */
+    }
+}
+
+/* Ajuster la taille de l'image pour les petits écrans */
+@media (max-width: 600px) {
+    .voyage-items img {
+        width: 100%; /* L'image prend toute la largeur de son conteneur */
+        height: auto; /* Laissez la hauteur s'ajuster automatiquement */
+    }
+}
+
+.voyage-items img {
+    width: 600px; /* Largeur fixe, ajustez selon vos besoins */
+    height: 300px; /* Hauteur fixe, ajustez selon vos besoins */
+    object-fit: cover; /* Remplit le conteneur en rognant les bords */
+}
+
+/* Pour que le conteneur prenne 100% de la largeur disponible */
+.destination-card {
+    display: flex; /* Utilise flex pour centrer le contenu à l'intérieur de la carte */
+    flex-direction: column; /* Aligne les éléments en colonne */
+    border: 1px solid #ccc; /* Ajoute une bordure autour de la carte */
+    border-radius: 10px; /* Arrondit les coins de la carte */
+    overflow: hidden; /* Cache les débordements */
+    transition: transform 0.3s; /* Transition pour l'effet de zoom */
+}
+
+.destination-card:hover {
+    transform: scale(1.05); /* Zoom léger au survol */
+}
+
+.temperature-overlay {
+    position: absolute;
+    top: 10px; /* Ajuster selon la position souhaitée */
+    left: 10px;
+    background-color: rgba(255, 255, 255, 0.3); /* Fond semi-transparent pour contraste */
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    z-index: 10; /* S'assurer qu'il reste au-dessus de l'image */
+    display: none; /* Par défaut, la température n'est pas affichée */
+}
+
+.zoom-image {
+    max-width: 100%;         /* L'image remplit le conteneur */
+    height: auto;            /* Conserve les proportions */
+    display: block;
+    transition: transform 0.5s ease, filter 0.5s ease; /* Transition fluide pour l'effet de zoom et de luminosité */
+}
+.zoom-container:hover .zoom-image {
+    transform: scale(1.05);   /* Zoom à 110% lors du survol */  
+    filter: brightness(1.1);  /* Augmente la luminosité à 120% lors du survol */  
+}
+
+.zoom-container:hover .temperature-overlay {
+    display: block; /* Affiche la température au survol */
+}
+
+.zoom-container {
+    text-decoration: none; /* Supprime le soulignement des liens */
+    position: relative;    /* Position relative pour les éléments enfants */
+display: inline-block;}
+
+.destination-info {
+    transition: height 0.3s; /* Transition fluide pour l'effet de déroulement */
+    padding: 10px;            /* Espace à l'intérieur de la carte */
+    text-align: center;       /* Centre le texte */
+    color : #006fbf
+}
+.destination-info p:first-of-type {
+    font-size: 25px;
+    font-weight: bold; /* Met le texte en gras */
+    margin: 0;        /* Supprime la marge par défaut, si nécessaire */
+}
+
+.price {
+    font-weight: bold;        /* Met le prix en gras */
+    color: #00528c;           /* Couleur du prix */
+}
+
+.background-image {
+    width: 100%;                 /* L'image prend 100% de la largeur du conteneur */
+    height: auto;                /* Maintient le ratio de l'image */
+    display: block;              /* Supprime l'espace en bas de l'image */
+}
+
+/* Conteneur principal de la barre de recherche */
+.search-bar-container {
+    position: absolute;
+    top:50%; /* Centré verticalement */
+    left: 50%; /* Centré horizontalement */
+    transform: translate(-50%, -50%); /* Ajustement pour un vrai centrage */
+    z-index: 10; /* Pour que la barre de recherche soit au premier plan */
+    background-color: rgba(255, 255, 255, 0.3); /* Légère transparence */
+    padding: 20px;
+    border-radius: 40px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 1); /* Ombre douce pour l'effet de profondeur */
+}
+
+/* Style du formulaire */
+.search-form {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espacement entre les éléments */
+}
+
+/* Input principal pour la recherche */
+.search-input {
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    width: 300px;
+    transition: all 0.3s ease;
+}
+
+/* Selecteurs pour les filtres */
+.search-select {
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+}
+
+.search-select:focus {
+    border-color: #30a7d7;
+    box-shadow: 0 0 8px rgba(48, 167, 215, 0.5);
+}
+
+/* Bouton de recherche */
+.search-button {
+    padding: 10px 20px;
+    background-color: #006fbf;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.search-button:hover {
+    background-color: #00528c;
+    transform: scale(1.05);
+}
+
+@media (max-width: 768px) {         /* Pour les écrans de 768px et moins */
+    .search-form {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .search-input, .search-select {
+        width: 100%; /* Assurer la responsivité */
+    }
+}
+
+.about-section {
+    text-align: center; /* Centre le texte pour "À propos" */
+    margin: 20px; /* Ajoute de l'espace autour du cadre */
+    border: 1px solid #006fbf;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.contact-map-container {
+    display: flex; /* Utilisation de Flexbox pour la disposition */
+    justify-content: space-between;
+}
+
+.contact-section, .reseaux-section {
+    flex: 1; /* Prend 1 part de l'espace disponible */
+    margin: 0 20px 20px 20px; /* 0 pour haut et bas, 20px pour gauche et droite */
+    margin-right: 20px; /* Espacement entre le contact et la carte */
+    text-align: left; /* Centre le texte pour "À propos" */
+    border: 1px solid #006fbf;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.left-column {
+    margin-right: 20px; /* Espacement entre les colonnes */
+    flex: 1;
+}
+
+.contact-section h2, .reseaux-section h2 {
+    text-align: center; /* Centre le titre */
+    margin: 0 0 10px 0; /* Optionnel : ajuster l'espacement du titre */
+    color : #006fbf;
+}
+
+.about-section h3 {
+    text-align: center; /* Centre le titre */
+    margin: 20px 0 7px 0; /* Optionnel : ajuster l'espacement du titre */
+}
+
+.about-section h2 {
+    text-align: center; /* Centre le titre */
+    margin: 0 0 30px 0; /* Optionnel : ajuster l'espacement du titre */
+    color : #006fbf;
+}
+
+
+.map-section {
+    flex: 1; /* Prend 1 part de l'espace disponible */
+    margin: 0 20px 20px 20px; /* 0 pour haut et bas, 20px pour gauche et droite */
+    margin-right: 20px; /* Espacement entre le contact et la carte */
+    text-align: center; /* Centre le texte pour "À propos" */
+    border: 1px solid #006fbf;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.map-section h2 {
+    text-align: center; /* Centre le titre */
+    margin: 0 0 10px 0; /* Optionnel : ajuster l'espacement du titre */
+    color : #006fbf;
+}
+
+#map {
+    text-align: center; /* Centrer la carte dans son cadre */
+}
+
+.reservation-form { 
+    width: 100%; 
+    max-width: 400px; 
+    margin: 0 auto; 
+}
+
+.form-group { 
+    margin-bottom: 15px; 
+}
+
+.reservation-form label { 
+    display: block; 
+    margin-bottom: 5px; 
+}
+
+.reservation-form input, .reservation-form select { 
+    width: 100%; 
+    padding: 5px; 
+    max-width: 100%; /* Ajusté pour s'assurer qu'il ne dépasse pas 100% de son conteneur */
+}
+
+.price-display { 
+    margin-top: 15px; 
+    font-weight: bold; 
+}
+
+#NosVoyages {
+    text-align: center; /* Centre le texte */
+    font-size: 3em; /* Ajustez la taille selon vos besoins */
+    color: #006fbf; /* Change la couleur du texte en bleu */
+}
+
+.content-container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    /* margin: 20px auto; */
+    padding: 120px
+}
+
+.image-slider {
+    flex: 1;
+}
+
+.slider {
+    position: relative;
+    display: flex;
+    overflow: hidden; /* Cacher les images qui débordent */
+    width: 700px; /* si on mets 100% ca prend toute la largeur disponible */
+    height: 350px; /* Hauteur fixe pour le slider */
+}
+
+.slider-image {
+    width: 100%; /* Chaque image prend la largeur complète du slider, on aurait pu mettre min-width */
+    height: auto;
+    /* display: none; /* Masquer toutes les images par défaut */
+}
+.prev, .next {
+    position: absolute;
+    top: 50%; /* Centre verticalement */
+    transform: translateY(-50%); /* Ajuste le décalage vertical */
+    background-color: rgba(255, 255, 255, 0.8); /* Fond semi-transparent */
+    border: none; /* Enlève la bordure */
+    color: black; /* Couleur du texte */
+    padding: 10px; /* Ajoute de l'espace autour du texte */
+    cursor: pointer; /* Change le curseur au survol */
+    border-radius: 5px; /* Arrondit les coins */
+    transition: background-color 0.3s; /* Animation lors du survol */
+    z-index: 10; /* Assure que les boutons sont au-dessus des images */
+}
+
+.prev:hover, .next:hover {
+    background-color: rgb(15, 176, 168); /* Change la couleur au survol */
+}
+
+.prev {
+    left: 0px  ; /* Positionne le bouton précédent à gauche */
+}
+
+.next {
+    right: 0px; /* Positionne le bouton suivant à droite */
+}
+
+.description {
+    margin-top: 40px;
+}
+
+.reservation-form-container {
+    flex: 1;
+    padding: 20px;
+    margin-left: 100px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.price-display {
+    font-weight: bold;
+    margin-top: 10px;
+    color:#092b79;
+}
+
+#NosVoyages {
+    scroll-margin-top: 120px; /* Décale la section de 120px lors du scroll pour éviter que le header ne cache le contenu */
+}
+
+.payment-form {
+    padding : 10px;
+    margin-top : 100px;
+}
+
+.panier h2 {
+    padding : 130px
+}
+
+.a_propos_et_contact {
+    padding: 10px
+}
+
+.panier-details {
+    padding: 10px;
+    margin-top : 0px;
+    margin-bottom: 150px;
+}
+
+
+.submit-button, .validate-button, .reset-button {
+    padding: 10px 20px;
+    background-color: #006fbf;
+    color: white;
+    font-size: 13px;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 10vh;
+}
+
+.validate-button {
+    margin-bottom: 4vh;
+}
+
+#reset-button-form {
+    padding: 10px 20px;
+    background-color: #006fbf;
+    color: white;
+    font-size: 13px;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 2vh;
+}
+
+
+
+
+
+
+.progress-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+    margin-top: 150px;
+}
+
+.step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: inline-block;
+    text-align: center;
+    line-height: 30px;
+    background-color: lightgray; /* Couleur par défaut */
+    color: white;
+    font-weight: bold;
+}
+
+.line {
+    height: 4px;
+    width: 100px;
+    display: inline-block;
+    background-color: lightgray; /* Couleur par défaut */
+}
+
+.completed {
+    color: white;
+}
+
+.red {
+    background-color: red;
+}
+
+.yellow {
+    background-color: orange;
+}
+
+.green {
+    background-color: green;
+}
+
+
+.step p {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #333;
+}
+
+/* Couleur pour les étapes rouges */
+.circle.red, .line.red {
+    background-color: rgba(16, 6, 202, 0.783);
+}
+
+/* Couleur pour les étapes jaunes */
+.circle.yellow, .line.yellow {
+    background-color: rgb(0, 134, 244);
+}
+
+/* Couleur pour les étapes vertes */
+.circle.green, .line.green {
+    background-color: rgb(105, 0, 243);
+}
+
+input:invalid { /* Style pour les champs invalides (erreur au remplissage des formulaire */
+    border: 2px solid red;
+}
+input:valid { /* Style pour les champs valides */
+    border: 2px solid rgb(0, 83, 160);
+}
+
+
+.search-select {
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    background-color: white;
+    display: inline-flex;     /* Utiliser flex pour aligner la case à cocher et le texte */
+    align-items: center;      /* Centrer verticalement le texte et la case */
+}
+
+/* Retirer la bordure par défaut de la case à cocher */
+#pets-allowed {
+    margin: 0;                /* Retirer la marge par défaut */
+    accent-color: #333;       /* Changer la couleur de la case à cocher pour correspondre au thème */
+}
+
+/* Cibler le label pour ajouter un espacement entre le texte et la case à cocher */
+label[for="pets-allowed"] {
+    margin-left: 8px;         /* Espacement à gauche du texte */
+    font-size: 14px;          /* Taille de police pour le texte */
+    white-space: nowrap;      /* Assurer que le texte reste sur une seule ligne */
+}
+
+/* Style pour le footer */
+.site-footer {
+    background-color: #ddd;  /* Fond gris foncé */
+    color: white;            /* Texte en blanc */
+    text-align: center;      /* Centrer le texte */
+    padding: 10px 0;         /* Espacement autour du footer */
+    position: relative;
+    clear: both;             /* S'assurer que le footer est en bas de la page */
+}
+
+/* Style pour le contenu du footer */
+.footer-content p {
+    margin: 0;
+    font-size: 14px;
+}
+
+/*pour le message de confirmation de voyage*/
+.confirmation-message {
+    margin: 100px auto;
+    padding: 15px;
+    text-align: center;
+    background-color: #e0ffe0;
+    border: 2px solid #28a745;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    color: #155724;
+    max-width: 600px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+
+/*pour la barre de chargement à la fin du payement*/
+#loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.loading-bar {
+    width: 50%;
+    height: 10px;
+    background-color: #007bff;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.loading-bar::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -50%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(90deg, #007bff, #00d4ff);
+    animation: loading-animation 2s infinite;
+}
+
+@keyframes loading-animation {
+    0% {
+        left: -50%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+#loading-overlay p {
+    font-size: 1.2rem;
+    color: #333;
+}
+
+
+/* Conteneur principal pour le formulaire et la vidéo pour gérer la taille des vidéos*/
+.form-and-video-container {
+    display: flex;
+    justify-content: space-between; /* Espacement entre les éléments */
+    align-items: flex-start; /* Aligner les éléments au début de la ligne */
+    margin: 20px;
+}
+
+/* Conteneur du formulaire */
+.form-container {
+    flex: 1; /* Cela fait en sorte que le formulaire prenne tout l'espace disponible */
+    padding-right: 20px; /* Espace entre le formulaire et la vidéo */
+}
+
+/* Conteneur de la vidéo */
+.video-container {
+    position: absolute;
+    top: 220px;  /* Positionner les vidéos à partir du haut de la page */
+    right: 50px;  /* Aligner les vidéos à droite */
+    width: 60%; /* Réduit la largeur de la vidéo pour qu'elle soit à droite du formulaire */
+    overflow: hidden; /* Masque le débordement de la vidéo */
+}
+
+/* Ajuster la taille de la vidéo si nécessaire */
+.video-player {
+    width: 100%; /* La vidéo occupe toute la largeur de son conteneur */
+    height: auto; /* Maintient les proportions de la vidéo */
+}
+

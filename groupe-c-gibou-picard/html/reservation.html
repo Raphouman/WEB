@@ -1,0 +1,133 @@
+<!-- https://github.com/cpe-lyon/groupe-c-gibou-picard-->
+<!--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-->
+<!-- mettre un rechercheur de vol intégré -->
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservation</title>
+    <link rel="icon" type="image/png" href="../image/logo_carre.png">
+    <link rel="stylesheet" href="../css/siteweb.css"> 
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="../js/js.js" defer></script>  
+    <script src="../js/header.js" defer></script>
+    <script src="../js/footer.js" defer></script>
+</head>
+<body>
+    <section>
+        <div id="header-container"></div> <!-- Conteneur pour le header -->
+    </section>
+
+    <main>
+        <div class="content-container">
+            <!-- Section d'images défilantes -->
+            <div class="image-slider">
+                <h2>Images du Voyage</h2>
+                <div class="slider">
+                    <img id="slider-image" src="" alt="Image du voyage" class="slider-image">
+                    <script>
+                        console.log("Chemin de l'image actuelle:", document.getElementById('slider-image').src);
+                    </script>
+                    <button class="prev" onclick="changeImage(-1)">&#10094;</button>
+                    <button class="next" onclick="changeImage(1)">&#10095;</button>
+                </div>
+            
+                <!-- Section de description du voyage -->
+                <div class="description">
+                    <h3>Description du Voyage</h3>
+                    <p id="description"></p> <!-- Élément pour afficher la description du voyage -->
+                </div>
+            </div>
+            <!-- Formulaire de réservation à droite -->
+            <div class="reservation-form-container">
+                <h1>Réservez votre Voyage</h1>
+                <form id="travel-form" class="reservation-form">
+                    <div class="form-group">
+                        <label for="departure-date">Date de départ *</label>
+                        <input type="date" id="departure-date" name="departure-date" required>
+                    </div>
+                
+                    <div class="form-group">
+                        <label for="return-date">Date de retour *</label>
+                        <input type="date" id="return-date" name="return-date" required>
+                    </div>
+                
+                    <div class="form-group">
+                        <label for="adults">Nombre d’adultes *</label>
+                        <input type="number" id="adults" name="adults" min="1" required>
+                    </div>
+                
+                    <div class="form-group">
+                        <label for="children">Nombre d’enfants (-12 ans) *</label>
+                        <input type="number" id="children" name="children" min="0" required>
+                    </div>
+                
+                    <div class="form-group">
+                        <label for="breakfast">Petit-déjeuner ?</label>
+                        <input type="checkbox" id="breakfast" name="breakfast">
+                    </div>
+                
+                    <div class="price-display" id="price-display">Prix total : 0 €</div>
+                
+                    <button id="reset-button" type="button" class="reset-button">Remettre à 0</button>
+                    <button id="submit-button" type="submit" class="submit-button">Soumettre</button>
+                </form>
+            </div>
+        </div>
+    </main> 
+
+
+    <div id="error-message" style="color: red; display: none;">Veuillez remplir tous les champs correctement.</div>
+    <script>            // ca recup les infos de réservation et les stocke dans le local storage pour le panier
+        document.getElementById('submit-button').addEventListener('click', (event) => {
+            event.preventDefault(); // Empêche l'envoi du formulaire
+
+            const adults = document.getElementById('adults').value;
+            const children = document.getElementById('children').value;
+            const breakfast = document.getElementById('breakfast').checked;
+            const priceDisplay = document.getElementById('price-display').textContent;
+            const errorMessage = document.getElementById('error-message').style.display;
+            const departureDate = document.getElementById('departure-date').value;
+            const returnDate = document.getElementById('return-date').value;
+
+        
+        
+            // Validation : Les enfants ne peuvent voyager seuls
+            if (adults < 1 && children > 0) {
+                document.getElementById('error-message').textContent = "Veuillez remplir tous les champs correctement.";
+                document.getElementById('error-message').style.display = 'block';
+                return;
+            }
+
+            // Validation : Dates incorrectes
+            
+            const days = (new Date(returnDate) - new Date(departureDate)) / (1000 * 60 * 60 * 24); // Calcul du nombre de jours entre les deux dates
+
+            if (days === 0 && returnDate <= departureDate || days <= 0) {
+                document.getElementById('error-message').textContent = "Veuillez remplir tous les champs correctement";
+                document.getElementById('error-message').style.display = 'block';
+                return;
+            }
+        
+            const reservationData = {
+                adults: adults,
+                children: children,
+                breakfast: breakfast,
+                price: priceDisplay,
+                returnDate: returnDate,
+                departureDate: departureDate,
+                days: days
+            };
+        
+            localStorage.setItem('reservationData', JSON.stringify(reservationData));
+        
+            // Rediriger vers la page panier
+            window.location.href = 'panier.html';
+        });
+    </script>
+    <div id="footer"></div>
+
+</body>
+</html>

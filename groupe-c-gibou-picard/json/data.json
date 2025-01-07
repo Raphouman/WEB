@@ -1,0 +1,43 @@
+{
+    "dates": {
+        "today": "",
+        "tomorrow": ""
+    },
+    "prices": {
+        "adult": 100,
+        "childRatio": 0.4,
+        "breakfast": 15
+    },
+    "defaults": {
+        "adults": 1,
+        "children": 0,
+        "breakfast": false
+    },
+    "destinations": {
+        "Nairobi": {
+            "description": "Découvrez la beauté sauvage du Kenya, un pays de safaris et de paysages à couper le souffle.",
+            "images": ["../image/nairobi.jpg", "../image/nairobi2.jpg", "../image/nairobi3.jpg"]
+        },
+        "New York": {
+            "description": "Explorez la ville qui ne dort jamais, avec ses gratte-ciel emblématiques et sa culture dynamique.",
+            "images": ["../image/new-york.jpg", "../image/new-york2.jpg", "../image/new-york3.jpg"]
+        },
+        "Paris": {
+            "description": "Vivez l'élégance et le romantisme de Paris, la ville de l'amour et de la gastronomie.",
+            "images": ["../image/paris.jpg", "../image/paris2.jpg", "../image/paris3.jpg"]
+        },
+        "Rio": {
+            "description": "Plongez dans l'ambiance festive de Rio de Janeiro, avec ses plages, sa musique et sa culture vibrante.",
+            "images": ["../image/rio.jpg", "../image/rio2.jpg", "../image/rio3.jpg"]
+        },
+        "Sydney": {
+            "description": "Découvrez la beauté naturelle de Sydney, avec son célèbre opéra et ses plages dorées.",
+            "images": ["../image/sydney.jpg", "../image/sydney2.jpg", "../image/sydney3.jpg"]
+        },
+        "Tokyo": {
+            "description": "Immergez-vous dans l'effervescence de Tokyo, où tradition et modernité se rencontrent.",
+            "images": ["../image/tokyo.jpg", "../image/tokyo2.jpg", "../image/tokyo2.jpg"]
+        }
+    }
+}
+
