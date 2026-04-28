@@ -1,8 +1,10 @@
-Raphael Picard
-CPE LYON Engineer (CLBD)
+**Par** : Picard Raphaël 3 ETI 
+**Lieu** : CPE LYON 
+**Date** : Novembre 2024 
+**Codé en** : HTML + CSS + JS sur VSCode
 
 # WEB
-First website
+**MY** first website
 
 ## TLW-chateau
 - Teacher example for the website
