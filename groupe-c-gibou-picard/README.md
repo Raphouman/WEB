@@ -105,8 +105,6 @@
 
 INDICATIONS : Nous évaluons le travail partagé à hauteur de 50% chacun. Voici le lien github de notre projet : "https://github.com/cpe-lyon/groupe-c-gibou-picard.git" . Et dans le js "recherch1.js" à la ligne.1 ; il faudra mettre sa propre clé API pour que la température soit correctement affichée.
 
-Merci d'avoir pris le temps de lire, en vous souhaitant d'excellente vacances et de bonnes fêtes de Noël.
-
 
 
 
